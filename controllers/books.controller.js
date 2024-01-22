@@ -18,21 +18,22 @@ export async function getOneBook(req, res) {
 
 export function searchForBooks(req, res) {
   try {
-    const q = req.query
+    // query parameter will come in as an object 
+    const q = req.query.q
     let book
     if (q.title) {
       console.log('1111', q.title)
-      book = bookStore.find((item) => {
+      book = Book.find((item) => {
         return item.title == q.title
       })
     }
     if (q.author) {
-      book = bookStore.find((item) => {
+      book = Book.find((item) => {
         return item.author == q.author
       })
     }
     if (q.author && q.title) {
-      book = bookStore.find((item) => {
+      book = Book.find((item) => {
         return item.title == q.title && item.author == q.author
       })
     }
@@ -70,6 +71,32 @@ export async function postABook(req, res) {
 }
 
 // Asignment
-export function updateABook(req, res) {}
+export async function updateABook(req, res) {
+  try {
+    // const q = req.query.q
+    const id = req.params.id
+   
+     
+    // Use findone and update beacuse its the method that can update a single object while returning the updated one
+      updatedBook = await Book.findOneAndUpdate({_id: id} , req.body, {new:true}  ) 
+      
+        // return item.title == q.title
+    console.log(updatedBook + ' updated');
+    res.send(updatedBook)
+    }
 
-export function deleteABook(req, res) {}
+   
+   catch (error) {
+    throw new Error(error.message)
+  }}
+
+
+export async function deleteABook(req, res) {
+  try {
+    const id = req.params.id
+    deletedBook = await Book.findByIdAndDelete({_id: id})
+    res.send(deletedBook)
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
