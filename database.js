@@ -43,5 +43,3 @@ export const bookStore = [
  
 
 
-
-// module.exports = {users, authors, bookStore}

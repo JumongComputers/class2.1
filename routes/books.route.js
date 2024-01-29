@@ -8,17 +8,19 @@ import {
   searchForBooks,
   updateABook,
 } from '../controllers/books.controller.js'
+import isLoggedIn from '../middleware/authentication.js'
+
 
 const books = Router()
 
 
 
-books.post('/', postABook)
+books.post('/', isLoggedIn,  postABook)
 books.get('/', getAllBooks)
 books.get('/search/?', searchForBooks)
 books.get('/:id', getOneBook)
-books.patch('/:id', updateABook)
-books.delete('/:id', deleteABook)
+books.patch('/:id', isLoggedIn, updateABook)
+books.delete('/:id', isLoggedIn, deleteABook)
 
 export default books
 

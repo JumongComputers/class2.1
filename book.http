@@ -11,3 +11,14 @@ Content-Type: application/json
     "gender": "male"
 
 }
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+    "firstName": "ade",
+    "lastName": "joy",
+    "email": "ade@ade.com",
+    "password": "AW123@904959595"
+}

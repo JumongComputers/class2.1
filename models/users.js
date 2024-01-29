@@ -35,6 +35,12 @@ const Schema = new mongoose.Schema({
     unique: true,
     required: [true, 'telephone is required'],
   },
+
+  // role: {
+  //   type: String,
+  //   enum:['reader', 'author', 'admin'],
+  //   required: [true, 'Email is required'],
+  // },
 })
 
 
