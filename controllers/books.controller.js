@@ -78,9 +78,7 @@ export async function postABook(req, res) {
 }
 
 // Asignment
-export function updateABook(req, res) {
- 
-}
+
 export async function updateABook(req, res) {
   try {
     // const q = req.query.q
