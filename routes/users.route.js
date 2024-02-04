@@ -1,6 +1,7 @@
 import { Router } from 'express'
-import { login, signUp } from '../controllers/users.controller.js'
+import { findAllUsers, findOneuser, login, searchForUser, signUp } from '../controllers/users.controller.js'
 import { validateLogin, validateSignup } from '../validations/users.validation.js'
+import isLoggedIn from '../middleware/authentication.js'
 
 
 const users = Router()
@@ -18,6 +19,9 @@ const doSomething = async (req, res, next) => {
 
 users.post('/',  validateSignup, signUp)
 users.post('/login', validateLogin, login)
+users.get('/', isLoggedIn, findAllUsers)
+users.get('/getAuser', isLoggedIn, findOneuser)
+users.get('/search', isLoggedIn, searchForUser)
 //  users.get('/', doSomething, getAllUsers)
 
 

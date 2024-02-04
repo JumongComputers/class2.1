@@ -19,8 +19,9 @@ export async function signUp(req, res, next) {
 
      const user = await User.create({ ...data, password: hashedPassword })
 
-    //  
+    // This is necessary so that the password entered will be wiped away from the memory
      user.password = null
+
      res.send(user)
    } catch (error) {
      next(new Exception(error.message, 400))
@@ -84,7 +85,7 @@ export  function searchForUser(req, res, next){
     let user
     if (u.firstName || u.lastName) {
       user = User.find((item)=>{
-        return item.firstName == u.firstName && item.lastName == u.lastName
+        return item.firstName == u.firstName && item.lastName 
       })
     }
     res.send(user)

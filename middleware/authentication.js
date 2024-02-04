@@ -9,12 +9,13 @@ export default function isLoggedIn(req, res, next) {
   try {
     if (req.headers.authorization) {
 
-      // This is because in the header the auth string looks like 'bearer token' so we intend to splito out the token 
+      // This is because in the header the auth string looks like 'bearer token' so we intend to split out the token 
       const token = req.headers.authorization.split(' ')[1]
       
       const decode = jwt.verify(token, process.env.JWT_SECRET)
 console.log(decode)
 
+      // This allows subsequent middleware or route handlers to access user information.
       req.user = decode
       
       next()
